@@ -13,11 +13,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False # with false doesn't keep tr
 app.secret_key = 'bruno' # MUST BE SECRET AND POSSIBLY COMPLEX.
 api = Api(app)
 
-@app.before_first_request # this decorator will start before the first request
-def create_tables():
-    db.create_all()
-
-
 jwt = JWT(app, authenticate, identity) # new endpoint /auth
 
 # mapping class to endpoints:
