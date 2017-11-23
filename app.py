@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -8,7 +10,7 @@ from resources.item import *
 from resources.store import *
 
 app = Flask(__name__) # instance of Flask class
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') # if DATABASE_URL fails, use sqlite
 app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False # with false doesn't keep track of all the modification
 app.secret_key = 'bruno' # MUST BE SECRET AND POSSIBLY COMPLEX.
 api = Api(app)
