@@ -21,7 +21,8 @@ class Store(Resource):
         return store.json(), 201
 
     def delete(self, name):
-        if StoreModel.find_by_name:
+        store = StoreModel.find_by_name(name)
+        if store:
             store.delete_from_db()
 
         return {'message': "The store named '{}' has been successfully deleted.".format(name)}
